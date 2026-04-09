@@ -21,7 +21,9 @@ class Main {
 
         stampaPresenze();
 
-
+        System.out.println("\nRICERCA STUDENTE:");
+        System.out.println("Presenze di DADI: " + cercaStudente("DADI"));
+        System.out.println("Presenze di ROSSI: " + cercaStudente("ROSSI"));
     }
 
     public static void aggiungiStudente(String nome) {
@@ -49,5 +51,11 @@ class Main {
         }
     }
 
-
+    public static String cercaStudente(String nome) {
+        if (presenze.containsKey(nome)) {
+            return presenze.get(nome).toString();
+        } else {
+            return "studente non trovato";
+        }
+    }
 }
