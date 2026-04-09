@@ -1,19 +1,61 @@
+import javax.swing.*;
 import java.util.*;
 
 class Main {
+    static HashMap<String, Integer> presenze = new HashMap<>();
+
     public static void main(String[] args) {
-        HashMap <String, Integer> presenze = new HashMap<>();
+        aggiungiStudente("DADI");
+        aggiungiStudente("DEYAE");
+        aggiungiStudente("CORTESI");
+        aggiungiStudente("CORTESI");
 
-        presenze.put("DADI", 10);
-        presenze.put("DEYAE", 9);
-        presenze.put("CORTESI", 8);
+        registraPresenze("DADI");
+        registraPresenze("DEYAE");
+        registraPresenze("CORTESI");
+        registraPresenze("ROSSI");
+        registraPresenze("DADI");
+        registraPresenze("DADI");
+        registraPresenze("DEYAE");
 
-        for (String k : presenze.keySet()) {
-            System.out.println(k);
+
+        stampaPresenze();
+
+        System.out.println("\nRICERCA STUDENTE:");
+        System.out.println("Presenze di DADI: " + cercaStudente("DADI"));
+        System.out.println("Presenze di ROSSI: " + cercaStudente("ROSSI"));
+    }
+
+    public static void aggiungiStudente(String nome) {
+        if (!presenze.containsKey(nome)) {
+            presenze.put(nome, 0);
+            System.out.println("Studente aggiunto: " + nome);
+        } else {
+            System.out.println("Studente " + nome + ": già presente");
         }
+    }
 
+    public static void registraPresenze(String nome) {
+        if (presenze.containsKey(nome)) {
+            int presenzeAttuali = presenze.get(nome);
+            presenze.put(nome, presenzeAttuali + 1);
+        } else {
+            System.out.println("Lo studente " +nome + " non è presente");
+        }
+    }
+
+    public static void stampaPresenze() {
+        System.out.println("\nPRESENZE:");
         for (Map.Entry<String, Integer> entry : presenze.entrySet()) {
-            System.out.println(entry.getValue());
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
+    }
+
+    public static String cercaStudente(String nome) {
+        if (presenze.containsKey(nome)) {
+            return presenze.get(nome).toString();
+        } else {
+            return "studente non trovato";
         }
     }
 }
